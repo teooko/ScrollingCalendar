@@ -1,21 +1,20 @@
 ﻿import {Pressable, StyleSheet, Text} from "react-native";
 import React, {useEffect, useRef} from "react";
 import {constants} from "./constants";
-const DayCard = ({data, onPress, selected}) => {
-    const {item} = data;
+const DayCard = ({answersId, dataObj, setDataObj}) => {
     const reff = useRef(0);
     useEffect(() => {
         reff.current += 1;
-        console.log(reff);
+        console.log(answersId);
     });
-    
     return(
-        <Pressable style={item.id === selected ? {...styles.card, ...styles.cardSelected} : styles.card} onPress={() => onPress()}>
+        <Pressable style={dataObj.dataById[answersId].selected === true ? {...styles.card, ...styles.cardSelected} : styles.card} 
+                   onPress={() => handlePress()}>
             <Text style={styles.monthDay}>
-                {item.monthDay}
+                {dataObj.dataById[answersId].monthDay}
             </Text>
             <Text style={styles.weekDay}>
-                {constants.weekDays[item.weekDay]}
+                {constants.weekDays[dataObj.dataById[answersId].weekDay]}
             </Text>
         </Pressable>
     )

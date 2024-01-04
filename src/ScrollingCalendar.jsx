@@ -7,12 +7,16 @@ const ScrollingCalendar = () => {
     const today = new Date(Date.now());
     const [month, setMonth] = useState(today.getMonth());
     const [year, setYear] = useState(today.getFullYear());
-
-    const {onViewCallBack} = useCalendarData(month, year, setMonth, setYear);
+    const [dataObj, setDataObj] = useState({
+        dataIdsList: [],
+        dataById: {
+        }
+    })
+    const {onViewCallBack} = useCalendarData(month, year, setMonth, setYear, dataObj);
 
     return (
         <SafeAreaView style={styles.backgroundStyle}>
-            <ScrollingDays onViewCallBack={onViewCallBack} today={today}/>
+            <ScrollingDays onViewCallBack={onViewCallBack} today={today} dataObj={dataObj} setDataObj={setDataObj}/>
             <CalendarHeader month={month} year={year} />
         </SafeAreaView>
     );

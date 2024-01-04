@@ -2,28 +2,34 @@
 import loadDays from "./loadDays";
 import {FlatList, StyleSheet, View} from "react-native";
 import DayCard from "./DayCard";
-const ScrollingDays = ({onViewCallBack, today}) => {
-    const [data, setData] = useState([])
+const ScrollingDays = ({onViewCallBack, today, dataObj, setDataObj}) => {
+    const [answersIdsList, setAnswersIdsList] = useState([]);
+
     const [lastLoaded, setLastLoaded] = useState(0);
-    const [selected, setSelected] = useState(0);
     
     useEffect(() => {
-        loadDays(lastLoaded, setLastLoaded, setData, today, 35, 6);
+        loadDays(lastLoaded, setLastLoaded, today, 200, 6, dataObj, setDataObj, answersIdsList, setAnswersIdsList);
+        //console.log(answersIdsList);
+        //console.log(dataObj);
     }, []);
-    
-    const renderItem = useCallback(((item) => <DayCard data={item} onPress={() => setSelected(item.item.id)} selected={selected}/>), [data, selected])
+
+    const renderItem = useCallback((item) => {
+        //console.log(item.item);
+        return <DayCard answersId={item.item} dataObj={dataObj} setDataObj={setDataObj}/>;
+    }, [answersIdsList]);
     return (
             <FlatList
                 style={styles.calendar}
-                data={data}
+                data={answersIdsList}
                 renderItem={renderItem}
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 ItemSeparatorComponent={() => <View style={{ width: 20 }} />}
                 overScrollMode={"never"}
-                onViewableItemsChanged={onViewCallBack}
+                //onViewableItemsChanged={onViewCallBack}
+                //triggers a re-render
                 viewabilityConfig={{ viewAreaCoveragePercentThreshold: 100 }}
-                onEndReached={() => loadDays(lastLoaded, setLastLoaded, setData, today, 35, 6)}
+                onEndReached={() => loadDays(lastLoaded, setLastLoaded, today, 200, 6, dataObj, setDataObj, answersIdsList, setAnswersIdsList)}
                 onEndReachedThreshold={0.3}
                 inverted={true}
             />

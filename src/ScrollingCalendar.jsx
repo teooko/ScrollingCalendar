@@ -3,6 +3,8 @@ import useCalendarData from "./useCalendarData";
 import {SafeAreaView, StyleSheet} from "react-native";
 import ScrollingDays from "./ScrollingDays";
 import CalendarHeader from "./CalendarHeader";
+import {Provider} from "react-redux";
+import Store from "../store";
 const ScrollingCalendar = () => {
     const today = new Date(Date.now());
     const [month, setMonth] = useState(today.getMonth());
@@ -11,10 +13,12 @@ const ScrollingCalendar = () => {
     const {onViewCallBack} = useCalendarData(month, year, setMonth, setYear);
 
     return (
-        <SafeAreaView style={styles.backgroundStyle}>
-            <ScrollingDays onViewCallBack={onViewCallBack} today={today}/>
-            <CalendarHeader month={month} year={year} />
-        </SafeAreaView>
+        <Provider store={Store}>
+            <SafeAreaView style={styles.backgroundStyle}>
+                <ScrollingDays onViewCallBack={onViewCallBack} today={today}/>
+                <CalendarHeader month={month} year={year} />
+            </SafeAreaView>
+        </Provider>
     );
 }
 

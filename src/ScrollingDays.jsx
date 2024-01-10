@@ -4,6 +4,7 @@ import {FlatList, StyleSheet, View} from "react-native";
 import DayCard from "./DayCard";
 import {useDispatch, useSelector} from "react-redux";
 import {insertDays} from "../store/slice";
+import {FlashList} from "@shopify/flash-list";
 const ScrollingDays = ({onViewCallBack, today}) => {
     //const [data, setData] = useState([])
     //const [lastLoaded, setLastLoaded] = useState(0);
@@ -18,20 +19,22 @@ const ScrollingDays = ({onViewCallBack, today}) => {
     const dispatch = useDispatch();
     const renderItem = useCallback((({item}) => <DayCard id={item} />), [data])
     return (
-            <FlatList
-                style={styles.calendar}
+        <View style={styles.calendar}>
+            <FlashList
                 data={data}
                 renderItem={renderItem}
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 ItemSeparatorComponent={() => <View style={{ width: 20 }} />}
                 overScrollMode={"never"}
-                onViewableItemsChanged={onViewCallBack}
+                //onViewableItemsChanged={onViewCallBack}
                 viewabilityConfig={{ viewAreaCoveragePercentThreshold: 100 }}
                 onEndReached={() => dispatch(insertDays())}
                 onEndReachedThreshold={0.3}
                 inverted={true}
+                estimatedItemSize={80}
             />
+        </View>
     );
 }
 

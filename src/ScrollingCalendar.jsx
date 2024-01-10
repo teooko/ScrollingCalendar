@@ -13,12 +13,11 @@ const ScrollingCalendar = () => {
     const {onViewCallBack} = useCalendarData(month, year, setMonth, setYear);
 
     return (
-        <Provider store={Store}>
             <SafeAreaView style={styles.backgroundStyle}>
                 <ScrollingDays onViewCallBack={onViewCallBack} today={today}/>
-                <CalendarHeader month={month} year={year} />
+                {//<CalendarHeader month={month} year={year}/>
+                    }
             </SafeAreaView>
-        </Provider>
     );
 }
 

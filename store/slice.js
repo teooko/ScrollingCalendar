@@ -7,7 +7,7 @@ const initialState = {
     },
     selected: 0,
     lastLoaded: 0,
-    max: 35,
+    max: 65,
     loading: 6,
     
 }
@@ -29,16 +29,15 @@ const slice = createSlice({
                             monthDay: date.getDate(),
                             weekDay: date.getDay(),
                             month: date.getMonth(),
-                            year: date.getFullYear(),
-                            selected: i === 0
+                            year: date.getFullYear()
                         }
             }
             state.lastLoaded = state.lastLoaded + state.loading + 1;
         },
         selectDay(state, {payload})
         {
-            console.log(payload);
-            state.days.daysById[payload].selected = !state.days.daysById[payload].selected;
+            console.log(payload + " " + "------------------------------------------------------------");
+            state.selected = payload;
         }
     }
 })

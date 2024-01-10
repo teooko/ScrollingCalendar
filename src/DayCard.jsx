@@ -12,9 +12,9 @@ const DayCard = ({id}) => {
     
     const calendar = useSelector(state => state.calendarReducer);
     const dispatch = useDispatch();
-    const {days} = calendar;
+    const {days, selected} = calendar;
     return(
-        <Pressable style={days.daysById[id].selected ? {...styles.card, ...styles.cardSelected} : styles.card} onPress={() => dispatch(selectDay(id))}>
+        <Pressable style={selected === id ? {...styles.card, ...styles.cardSelected} : styles.card} onPress={() => dispatch(selectDay(id))}>
             <Text style={styles.monthDay}>
                 {days.daysById[id].monthDay}
             </Text>

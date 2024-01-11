@@ -1,8 +1,11 @@
 ﻿import {Text, View} from "react-native";
 import React from "react";
 import {constants} from "./constants";
+import {useSelector} from "react-redux";
 
-const CalendarHeader = ({month, year}) => {
+const CalendarHeader = () => {
+    const calendar = useSelector(state => state.calendarReducer);
+    const {month, year} = calendar;
     return (
         <View>
             <Text>

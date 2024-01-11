@@ -33,7 +33,9 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         borderColor: 'transparent',
         borderStyle: 'solid',
-        borderWidth: 3
+        borderWidth: 3,
+        marginLeft: 10,
+        marginRight: 10
     },
     cardSelected: {
         borderColor: 'red',

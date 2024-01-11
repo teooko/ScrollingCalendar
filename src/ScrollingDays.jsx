@@ -1,19 +1,10 @@
-﻿import React, {useCallback, useEffect, useState} from "react";
-import loadDays from "./loadDays";
-import {FlatList, StyleSheet, View} from "react-native";
+﻿import React, {useCallback} from "react";
+import {StyleSheet, View} from "react-native";
 import DayCard from "./DayCard";
 import {useDispatch, useSelector} from "react-redux";
-import {insertDays} from "../store/slice";
+import {changeHeader,insertDays} from "../store/slice";
 import {FlashList} from "@shopify/flash-list";
-const ScrollingDays = ({onViewCallBack, today}) => {
-    //const [data, setData] = useState([])
-    //const [lastLoaded, setLastLoaded] = useState(0);
-    //const [selected, setSelected] = useState(0);
-    /*
-    useEffect(() => {
-        loadDays(lastLoaded, setLastLoaded, setData, today, 35, 6);
-    }, []);
-    */
+const ScrollingDays = () => {
     const calendar = useSelector(state => state.calendarReducer);
     const { data } = calendar; 
     const dispatch = useDispatch();
@@ -25,14 +16,13 @@ const ScrollingDays = ({onViewCallBack, today}) => {
                 renderItem={renderItem}
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                ItemSeparatorComponent={() => <View style={{ width: 20 }} />}
                 overScrollMode={"never"}
-                //onViewableItemsChanged={onViewCallBack}
+                onViewableItemsChanged={useCallback((viewableItems) => dispatch(changeHeader(viewableItems)), [])}
                 viewabilityConfig={{ viewAreaCoveragePercentThreshold: 100 }}
                 onEndReached={() => dispatch(insertDays())}
                 onEndReachedThreshold={0.3}
                 inverted={true}
-                estimatedItemSize={80}
+                estimatedItemSize={100}
             />
         </View>
     );

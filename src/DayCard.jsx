@@ -14,12 +14,12 @@ const DayCard = ({id}) => {
     const dispatch = useDispatch();
     const {days, selected} = calendar;
     return(
-        <Pressable style={selected === id ? {...styles.card, ...styles.cardSelected} : styles.card} onPress={() => dispatch(selectDay(id))}>
-            <Text style={styles.monthDay}>
-                {days.daysById[id].monthDay}
-            </Text>
-            <Text style={styles.weekDay}>
+        <Pressable style={styles.card} onPress={() => dispatch(selectDay(id))}>
+            <Text style={selected === id ? {...styles.weekDay, ...styles.cardSelected} : styles.weekDay}>
                 {constants.weekDays[days.daysById[id].weekDay]}
+            </Text>
+            <Text style={selected === id ? {...styles.monthDay, ...styles.cardSelected} : styles.monthDay}>
+                {days.daysById[id].monthDay}
             </Text>
         </Pressable>
     )
@@ -31,28 +31,25 @@ const styles = StyleSheet.create({
         width: 80,
         height: 100,
         borderRadius: 15,
-        borderColor: 'transparent',
-        borderStyle: 'solid',
-        borderWidth: 3,
-        marginLeft: 10,
-        marginRight: 10
+        marginLeft: 5,
+        marginRight: 5
     },
     cardSelected: {
-        borderColor: 'red',
+        color: "#DF5454",
     },
     monthDay: {
-        color: "black",
-        fontSize: 35,
-        fontWeight: "bold",
+        color: "#560D0D",
+        fontSize: 30,
         marginLeft: "auto",
         marginRight: "auto",
-        paddingTop: 20
+        
     },
     weekDay: {
-        color: "black",
+        color: "#560D0D",
         fontSize: 15,
         marginLeft: "auto",
         marginRight: "auto",
+        paddingTop: 10
     }
 });
 

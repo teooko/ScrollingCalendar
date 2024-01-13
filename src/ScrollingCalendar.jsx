@@ -15,7 +15,6 @@ const ScrollingCalendar = () => {
 const styles = StyleSheet.create({
     backgroundStyle: {
         width: '100%',
-        backgroundColor: 'black'
     }
 });
 export default ScrollingCalendar;

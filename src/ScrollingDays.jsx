@@ -5,10 +5,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {changeHeader,insertDays} from "../store/slice";
 import {FlashList} from "@shopify/flash-list";
 const ScrollingDays = () => {
-    const calendar = useSelector(state => state.calendarReducer);
-    const { data } = calendar; 
+    const { data } = useSelector(state => state.calendarReducer);
     const dispatch = useDispatch();
-    const renderItem = useCallback((({item}) => <DayCard id={item} />), [data])
+    const renderItem = useCallback(({item}) => <DayCard id={item} />, [data]);
+    const onViewableItemsChanged = useCallback((viewableItems) => dispatch(changeHeader(viewableItems)), []);
+    
     return (
         <View style={styles.calendar}>
             <FlashList
@@ -17,12 +18,12 @@ const ScrollingDays = () => {
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 overScrollMode={"never"}
-                onViewableItemsChanged={useCallback((viewableItems) => dispatch(changeHeader(viewableItems)), [])}
+                onViewableItemsChanged={onViewableItemsChanged}
                 viewabilityConfig={{ viewAreaCoveragePercentThreshold: 100 }}
                 onEndReached={() => dispatch(insertDays())}
                 onEndReachedThreshold={0.3}
                 inverted={true}
-                estimatedItemSize={100}
+                estimatedItemSize={90}
             />
         </View>
     );

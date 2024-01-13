@@ -3,7 +3,6 @@ import {SafeAreaView, StyleSheet} from "react-native";
 import ScrollingDays from "./ScrollingDays";
 import CalendarHeader from "./CalendarHeader";
 const ScrollingCalendar = () => {
-    
     return (
             <SafeAreaView style={styles.backgroundStyle}>
                 <ScrollingDays />

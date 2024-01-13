@@ -38,23 +38,18 @@ const slice = createSlice({
         },
         selectDay(state, {payload})
         {
-            console.log(payload + " " + "------------------------------------------------------------");
             state.selected = payload;
         },
         changeHeader(state, {payload})
         {
             if (payload.changed[0].isViewable) {
                 const id = payload.changed[0].item;
-
+                
                 if (state.days.daysById[id].month !== state.month) {
-
                     state.month = state.days.daysById[id].month;
-
                 }
                 if (state.days.daysById[id].year !== state.year) {
-
                     state.year = state.days.daysById[id].year;
-
                 }
             }
         }

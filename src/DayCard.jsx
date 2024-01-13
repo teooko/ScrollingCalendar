@@ -1,18 +1,10 @@
-﻿import {Pressable, StyleSheet, Text, useWindowDimensions} from "react-native";
-import React, {useEffect, useRef} from "react";
+﻿import {Pressable, StyleSheet, Text} from "react-native";
 import {constants} from "./constants";
 import {useDispatch, useSelector} from "react-redux";
 import {selectDay} from "../store/slice";
 const DayCard = ({id}) => {
-    const reff = useRef(0);
-    useEffect(() => {
-        reff.current += 1;
-        console.log(days.daysById[id].monthDay + " " + constants.weekDays[days.daysById[id].weekDay] + " " + reff.current);
-    });
-    
-    const calendar = useSelector(state => state.calendarReducer);
+    const {days, selected} = useSelector(state => state.calendarReducer);
     const dispatch = useDispatch();
-    const {days, selected} = calendar;
     return(
         <Pressable style={styles.card} onPress={() => dispatch(selectDay(id))}>
             <Text style={selected === id ? {...styles.weekDay, ...styles.cardSelected} : styles.weekDay}>
